@@ -4,29 +4,42 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- <link
+    <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
-    /> -->
+    />
     <title>View All Flights</title>
   </head>
   <body>
     <nav>
-      <a href="/flights">ALL FLIGHTS</a>
-      <a href="/flights/new">ADD FLIGHTS</a>
+      <div class="nav-wrapper">
+        <ul id="nav-mobile" class="left hide-on-med-and-down">
+          <li><a href="">ALL FLIGHTS</a></li>
+          <li><a href="/flights/new">ADD FLIGHTS</a></li>
+        </ul>
+      </div>
     </nav>
     <div class="flights-container">
       <% if (flights.length === 0) { %>
       <p>No flights currently available</p>
-      <% } else { %> <% for (let flight of flights) { %>
-      <div class="flight-container">
-        <p>Airline: <%= flight.airline %></p>
-        <p>Airport: <%= flight.airport %></p>
-        <p>Flight No.: <%= flight.flightNo %></p>
-        <p>Departs: <%= flight.departs %></p>
+      <% } else { %> <% let classes = ['red-text', 'white-text']; %> <% let
+      today = new Date(); %> <% for (let flight of flights) { %>
+      <div class="row">
+        <div class="col s12 m6">
+          <div class="card-panel teal">
+            <% let textColor; %> <% if (today > flight.departs) { %> <%
+            textColor = classes[0]; %> <% } else { %> <% textColor = classes[1];
+            %> <% } %>
+            <p class="<%= textColor %>">Airline: <%= flight.airline %></p>
+            <p class="<%= textColor %>">Airport: <%= flight.airport %></p>
+            <p class="<%= textColor %>">Flight No.: <%= flight.flightNo %></p>
+            <p class="<%= textColor %>">Departs: <%= flight.departs %></p>
+          </div>
+        </div>
       </div>
       <% } %> <% } %>
     </div>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="/javascripts/index/script.js"></script>
   </body>
 </html>

@@ -8,12 +8,18 @@ let Flight = require("../models/flight");
 
 function index(req, res) {
   Flight.find({}, function (err, flights) {
+    flights.sort((a, b) => {
+      return a.departs - b.departs;
+    });
     res.render("flights/index", { flights });
   });
 }
 
 function newFlight(req, res) {
-  res.render("flights/new");
+  const newFlight = new Flight();
+  const dt = newFlight.departs;
+  const departsDate = dt.toISOString().slice(0, 16);
+  res.render("flights/new", { departsDate });
 }
 
 async function create(req, res) {

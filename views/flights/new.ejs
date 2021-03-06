@@ -4,47 +4,83 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- <link
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
-    /> -->
+    />
+    <link rel="stylesheet" href="/stylesheets/new/style.css" />
     <title>Add New Flight</title>
   </head>
   <body>
     <nav>
-      <a href="/flights">ALL FLIGHTS</a>
-      <a href="">ADD FLIGHTS</a>
+      <div class="nav-wrapper">
+        <ul id="nav-mobile" class="left hide-on-med-and-down">
+          <li><a href="/flights">ALL FLIGHTS</a></li>
+          <li><a href="">ADD FLIGHTS</a></li>
+        </ul>
+      </div>
     </nav>
-    <form action="/flights" method="POST">
-      <label for="airline"
-        >Airline:
-        <select name="airline">
-          <option value="American">American</option>
-          <option value="Southwest">Southwest</option>
-          <option value="United">United</option>
-        </select> </label
-      ><br />
-      <label for="airport"
-        >Airport:
-        <select name="airport">
-          <option value="AUS">AUS</option>
-          <option value="DFW">DFW</option>
-          <option value="DEN" selected>DEN</option>
-          <option value="LAX">LAX</option>
-          <option value="SAN">SAN</option>
-        </select>
-      </label>
-      <br />
-      <label for="flightNo"
-        >Flight No.:
-        <input type="number" name="flightNo" min="10" max="9999" />
-      </label>
-      <label for="departs"
-        >Departure: <input type="datetime-local" name="departs" />
-      </label>
-      <br />
-      <button type="submit">Add</button>
-    </form>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> -->
+    <div class="form-container">
+      <form action="/flights" method="POST" class="">
+        <div class="row">
+          <div class="input-field">
+            <select name="airline">
+              <option value="" disabled selected>Choose your option</option>
+              <option value="American">American</option>
+              <option value="Southwest">Southwest</option>
+              <option value="United">United</option>
+            </select>
+            <label for="airline">Airline:</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field">
+            <select name="airport">
+              <option value="AUS">AUS</option>
+              <option value="DFW">DFW</option>
+              <option value="DEN" selected>DEN</option>
+              <option value="LAX">LAX</option>
+              <option value="SAN">SAN</option>
+            </select>
+            <label for="airport">Airport:</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field">
+            <input
+              type="number"
+              name="flightNo"
+              min="10"
+              max="9999"
+              class="validate"
+            />
+            <label for="flightNo">Flight No.:</label>
+          </div>
+        </div>
+        <div class="row">
+          <label for="departs">Departure:</label>
+          <div class="input-field">
+            <input
+              type="datetime-local"
+              name="departs"
+              value="<%= departsDate %>"
+            />
+          </div>
+        </div>
+        <div class="row">
+          <div class="button-container">
+            <button class="btn waves-effect waves-light" type="submit">
+              Add<i class="material-icons right">send</i>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="/javascripts/new/script.js"></script>
   </body>
 </html>
