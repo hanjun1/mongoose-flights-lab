@@ -1,28 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
-    />
-    <link rel="stylesheet" href="/stylesheets/new/style.css" />
-    <title>View All Flights</title>
-  </head>
-  <body>
-    <nav>
-      <div class="nav-wrapper">
-        <ul id="nav-mobile" class="left hide-on-med-and-down">
-          <li><a href="/flights/">ALL FLIGHTS</a></li>
-          <li><a href="/flights/new">ADD FLIGHTS</a></li>
-        </ul>
-      </div>
-    </nav>
-    <div>
-
-    </div>
+<%- include('../partial/header') %>
     <div class="destinations-container">
         <% if (flight.destinations.length == 0) { %> 
             <p>No available destinations.</p>
@@ -56,7 +32,6 @@
               <% for (let destination of flight.destinations) { %> 
                 <% usedAirports.push(destination.airport); %> 
               <% } %> 
-              <% console.log(usedAirports); %> 
             <select name="airport">
               <option value="" disabled selected>Choose Option</option>
               <% if (!usedAirports.includes("AUS")) { %> 
@@ -93,7 +68,27 @@
         </div>
       </form>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script src="/javascripts/new/script.js"></script>
-  </body>
-</html>
+    <div class="ticket-container">
+      <% if (tickets.length == 0) { %> 
+        <p>No tickets currently sold for this flight.</p>
+      <% } else { %> 
+        <table>
+          <thead>
+            <th>Seat</th>
+            <th>Price</th>
+          </thead>
+          <tbody>
+            <% for (let ticket of tickets) { %> 
+              <tr>
+                <td><%= ticket.seat %></td>
+                <td><%= ticket.price %></td>
+              </tr>
+            <% } %> 
+          </tbody>
+        </table>
+      <% } %> 
+    </div>
+    <div class="button-container">
+      <a href="/flights/<%= flight.id %>/ticket/new"><button class="btn waves-effect waves-light">New Ticket</button></a>
+    </div>
+<%- include('../partial/footer') %>
