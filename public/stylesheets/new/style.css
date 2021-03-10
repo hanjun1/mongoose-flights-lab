@@ -12,3 +12,20 @@ form {
   display: flex;
   justify-content: center;
 }
+
+.destinations-container {
+  display: flex;
+  justify-content: center;
+}
+
+.destination-table {
+  display: flex;
+  flex-direction: row;
+}
+
+.airport-col,
+.arrival-col {
+  display: flex;
+  flex-direction: column;
+  margin: 0px 10px;
+}

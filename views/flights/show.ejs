@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link rel="stylesheet" href="/stylesheets/new/style.css" />
+    <title>View All Flights</title>
+  </head>
+  <body>
+    <nav>
+      <div class="nav-wrapper">
+        <ul id="nav-mobile" class="left hide-on-med-and-down">
+          <li><a href="/flights/">ALL FLIGHTS</a></li>
+          <li><a href="/flights/new">ADD FLIGHTS</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div>
+
+    </div>
+    <div class="destinations-container">
+        <% if (flight.destinations.length == 0) { %> 
+            <p>No available destinations.</p>
+        <% } else { %>
+            <table>
+                <thead>
+                    <th>Airport</th>
+                    <th>Arrival Time</th>
+                    <th>Delete?</th>
+                </thead>
+                <tbody>
+                    <% for (let destination of flight.destinations) { %> 
+                        <tr>
+                            <td><%= destination.airport %></td>
+                            <td><%= destination.arrival %></td>
+                            <td><form action="/flights/<%= flight.id %>/destination/<%= destination.id %>?_method=DELETE" method="POST">
+                                <button type="submit" class="btn waves-effect waves-light">DELETE</button>
+                            </form></td>
+                        </tr>
+                    <% } %> 
+                </tbody>
+            </table>
+        <% } %> 
+    </div>
+    <div class="form-container">
+      <form action="/flights/<%= flight.id %>/destination" method="POST">
+        <div class="row">
+          <div class="input-field">
+              <% let usedAirports = []; %>
+              <% usedAirports.push(flight.airport); %> 
+              <% for (let destination of flight.destinations) { %> 
+                <% usedAirports.push(destination.airport); %> 
+              <% } %> 
+              <% console.log(usedAirports); %> 
+            <select name="airport">
+              <option value="" disabled selected>Choose Option</option>
+              <% if (!usedAirports.includes("AUS")) { %> 
+              <option value="AUS">AUS</option>
+              <% } %> 
+              <% if (!usedAirports.includes("DFW")) { %> 
+              <option value="DFW">DFW</option>
+              <% } %> 
+              <% if (!usedAirports.includes("DEN")) { %> 
+              <option value="DEN">DEN</option>
+              <% } %> 
+              <% if (!usedAirports.includes("LAX")) { %> 
+              <option value="LAX">LAX</option>
+              <% } %> 
+              <% if (!usedAirports.includes("SAN")) { %> 
+              <option value="SAN">SAN</option>
+              <% } %> 
+            </select>
+            <label for="airport">Airport:</label>
+          </div>
+        </div>
+        <div class="row">
+          <label for="arrival">Arrival</label>
+          <div class="input-field">
+            <input type="datetime-local" name="arrival" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="button-container">
+            <button class="btn waves-effect waves-light" type="submit">
+              Add Destination</i>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="/javascripts/new/script.js"></script>
+  </body>
+</html>

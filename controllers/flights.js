@@ -2,6 +2,7 @@ module.exports = {
   index,
   new: newFlight,
   create,
+  show,
 };
 
 let Flight = require("../models/flight");
@@ -28,4 +29,9 @@ async function create(req, res) {
   }
   await Flight.create(req.body);
   res.redirect("/flights");
+}
+
+async function show(req, res) {
+  let flight = await Flight.findById(req.params.id);
+  res.render("flights/show", { flight });
 }
