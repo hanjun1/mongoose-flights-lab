@@ -16,7 +16,10 @@ async function create(req, res) {
     await flight.save();
     res.redirect(`/flights/${req.params.id}`);
   } catch (e) {
-    res.render("error", e);
+    res.render("error", {
+      message: "There's an error!",
+      error: e,
+    });
   }
 }
 
@@ -32,6 +35,9 @@ async function deleteDestination(req, res) {
     await flight.save();
     res.redirect(`/flights/${req.params.id}`);
   } catch (e) {
-    res.render("error", e);
+    res.render("error", {
+      message: "There's an error!",
+      error: e,
+    });
   }
 }

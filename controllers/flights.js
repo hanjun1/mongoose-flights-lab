@@ -25,11 +25,18 @@ function newFlight(req, res) {
 }
 
 async function create(req, res) {
-  for (let key in req.body) {
-    if (req.body[key] === "") delete req.body[key];
+  try {
+    for (let key in req.body) {
+      if (req.body[key] === "") delete req.body[key];
+    }
+    await Flight.create(req.body);
+    res.redirect("/flights");
+  } catch (e) {
+    res.render("error", {
+      message: "There's an error!",
+      error: e,
+    });
   }
-  await Flight.create(req.body);
-  res.redirect("/flights");
 }
 
 async function show(req, res) {

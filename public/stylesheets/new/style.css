@@ -2,6 +2,16 @@ form {
   width: 500px;
 }
 
+table {
+  width: 750px;
+}
+
+th,
+td {
+  width: (750/3) px;
+  text-align: center;
+}
+
 .form-container {
   display: flex;
   justify-content: center;
@@ -13,7 +23,8 @@ form {
   justify-content: center;
 }
 
-.destinations-container {
+.destinations-container,
+.ticket-container {
   display: flex;
   justify-content: center;
 }
@@ -28,4 +39,8 @@ form {
   display: flex;
   flex-direction: column;
   margin: 0px 10px;
+}
+
+.ticket-button {
+  margin: 30px;
 }
